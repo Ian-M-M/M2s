@@ -1,8 +1,12 @@
 # Multi2sim
 
+http://multi2sim.org/publications.html
+
+## Gshare
+
 I have study the branch predictor of the **m2s** simulator, and added the **gshare predictor.** 
 
-## Some theory about gshare
+#### Some theory about gshare
 
 On this predictor we use one essential component, the branch history (**bhr**), which is a "memory" that contain the **n** last predictions. We need to use it to make the next prediction and record the actual prediction, this is done this way:
 
@@ -14,7 +18,7 @@ On this predictor we use one essential component, the branch history (**bhr**), 
 
 Now, we need to do this operation on the less significant bits, so we have to displace the bits on the **bhr**, but how much? well, we need to have the log<sub>2</sub>(bimodal size) minus the bhr size.
 
-## Implementation
+#### Implementation
 
 Once we know this, we can make this simple approach to the solution:
 
@@ -26,7 +30,7 @@ bpred->gshare_bhr = (bpred->gshare_bhr >> 1) | ( (bpred->gshare_bhr) << (31) );
 uop->pred = uop->gspred;
 ```
 
-## References
+#### References
 
 [McFarling-Combining Branch Predictors](https://www.hpl.hp.com/techreports/Compaq-DEC/WRL-TN-36.pdf)
 
